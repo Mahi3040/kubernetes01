@@ -1,0 +1,19 @@
+apiVersion: v1 
+kind: Pod
+metadata: 
+  name: vol-pod 
+spec:
+  containers:
+  - name: vol-container
+    image: nginx 
+    ports:
+    - containerPort: 80 
+      protocol: TCP
+    volumeMounts:
+    - name: config-map
+      mountPath: /etc/tempvol
+  volumes:
+  - name: config-map 
+    configMap: 
+      name: vol-configmap
+    

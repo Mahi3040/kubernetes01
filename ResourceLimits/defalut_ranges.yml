@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-ranges-dev-team
+  namespace: dev-team
+  labels:
+    env: dev
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 300m
+        memory: 300Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 100Mi
+      min:
+        cpu: 50m
+        memory: 50Mi
+      max:
+        cpu: 600m
+        memory: 600Mi

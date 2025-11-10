@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy 
+metadata:
+  name: net-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx 
+  policyTypes: 
+  - Ingress 
+  - Egress 
+  ingress: 
+  - from:
+    - podSelector:
+        matchLabels:
+          app: shopping 
+    ports: 
+    - protocol: TCP
+      port: 80

@@ -1,0 +1,75 @@
+1️⃣ Control Plane Components
+
+These components manage the overall cluster state.
+
+Component	                         Purpose
+API Server (kube-apiserver)   	Central hub of Kubernetes. All kubectl or API calls go here. Validates requests, enforces schema, runs admission controllers, and stores objects in etcd.
+etcd                        	Distributed key-value store. Persists the cluster’s state (Pods, Deployments, ConfigMaps, etc.). Acts as Kubernetes’ source of truth.
+Controller Manager (kube-controller-manager)	Runs various controllers that maintain desired state:
+• Node Controller →  monitors nodes
+• Deployment Controller → creates ReplicaSets for Deployments
+• Replication Controller → ensures N replicas (pod creation)
+• Job Controller → runs batch jobs
+• Endpoint Controller → manages Service endpoints
+Scheduler (kube-scheduler)	  Watches for Pods without assigned nodes. Chooses the best node for each Pod based on resources, affinity/anti-affinity, taints, tolerations, and policies.
+
+
+2️⃣ Node Components (Worker Nodes)
+
+These run Pods and containers.
+
+Component	Purpose
+Kubelet	Agent running on every node. Watches assigned Pods, ensures containers are running, manages volumes and networking, reports Pod status to the API server.
+Container Runtime (containerd, Docker, CRI-O)	Actually pulls images and runs containers in Pods. Kubelet communicates with it via the CRI (Container Runtime Interface).
+kube-proxy	Manages networking for Services. Implements ClusterIP, NodePort, LoadBalancer, and routing rules to ensure traffic reaches the right Pods.
+CNI plugin (Calico, Flannel, Weave, etc.)	Provides Pod networking: assigns Pod IPs, sets up routing between Pods, and enables cross-node communication.
+
+
+
+
+1. Scalars (single values)
+Scalars are plain values: string, number, boolean, null.
+
+Example:
+name: my-pod      # string scalar
+replicas: 2       # integer scalar
+enabled: true     # boolean scalar
+description: null # null scalar
+
+2. Maps (dictionaries / key-value pairs)
+A map is a collection of key–value pairs.
+
+Example:
+metadata:                # map
+  name: my-deployment    # scalar inside map
+  labels:                # map inside map
+    app: nginxapp
+    tier: frontend
+
+Here:
+metadata → map
+labels → map inside metadata
+name: my-deployment → scalar inside metadata
+
+3. Lists (arrays / sequences)
+A list is an ordered collection, written with dashes -.
+
+Example:
+containers:            # list
+  - name: nginx        # map (first item of list)
+    image: nginx:latest
+    ports:             # list inside map
+      - containerPort: 80   # map inside list
+  - name: sidecar      # map (second item of list)
+    image: httpd
+    ports:
+      - containerPort: 81
+
+
+Here:
+containers → list
+Each item in the list (- name: nginx, - name: sidecar) → map
+Inside each container, ports is again a list → each item is a map (containerPort: 80)
+
+✅ So YAML = Scalars + Maps + Lists
+They can nest inside each other.

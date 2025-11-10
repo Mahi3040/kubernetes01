@@ -1,0 +1,42 @@
+full access to everything. Instead, you define:
+Who can do something
+What they can do
+Where they can do it
+That’s where Roles and RoleBindings come in.
+
+RBAC (Role-Based Access Control) :
+================================
+in Kubernetes is a method of regulating access to resources based on the roles
+of individual users or service accounts within a cluster. It helps ensure that 
+users or processes only have the permissions they need and nothing more
+
+Subjects
+=========
+Subjects are entities you grant permissions to:
+Users – authenticated human users
+Groups – a collection of users
+ServiceAccounts – accounts used by applications running in pods
+
+
+1. Role
+Defines a set of permissions (rules) within a namespace.
+Specifies what actions can be taken on which resources.
+Example: A Role might allow listing pods and creating ConfigMaps in a specific namespace.
+
+2. ClusterRole
+Similar to a Role but is cluster-scoped.
+Can be used across all namespaces or for non-namespaced resources (e.g., nodes, persistent volumes).
+Can also be used in namespaced contexts.
+
+3. RoleBinding
+Binds a Role to a user, group, or service account within a namespace.
+Grants the permissions defined in the Role to the subject.
+
+4. ClusterRoleBinding
+Binds a ClusterRole to a user, group, or service account across the entire cluster.
+Useful for giving global access.
+
+
+command:
+
+kubectl auth can-i delete pods --as=system:serviceaccount:dev-team:test-serviceac -n dev-team

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manaul-fs-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: manual-fs-app
+  template:
+    metadata:
+      labels:
+        app: manual-fs-app
+    spec:
+      containers:
+      - name: fscontainer
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /dev/test
+            name: manual-fs-vol
+      volumes:
+        - name: manual-fs-vol 
+          persistentVolumeClaim:
+            claimName:  manual-fs-pvc

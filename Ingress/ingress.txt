@@ -1,0 +1,81 @@
+🔹 Annotation
+nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+✅ What it means
+By default, the NGINX Ingress controller will force redirect HTTP → HTTPS if TLS is enabled on that Ingress.
+This annotation turns that off.
+i.e., if someone visits http://example.com, they will stay on HTTP instead of being forced to https://example.com.
+
+🔹 Use Cases
+You want to allow both HTTP and HTTPS access.
+You’re testing locally without certificates.
+Your service/application handles HTTPS redirection itself.
+You’re using a custom TLS termination setup (e.g., at a cloud load balancer).
+
+
+
+
+🔹 What is an Annotation?
+
+Annotation is a key-value pair attached to Kubernetes objects (Pods, Services, Deployments, Ingress, etc.).
+
+They are like metadata tags, but unlike labels, they are NOT used for selection (you can’t query or filter objects with annotations).
+
+Instead, annotations are meant for storing extra, non-identifying information about the object.
+
+🔹 Purpose / Uses of Annotations
+1. Attach non-identifying metadata
+
+Store information that is not used for grouping or selection.
+
+Example: Git commit hash, build ID, contact person, or ticket reference.
+
+metadata:
+  annotations:
+    git-commit: "a1b2c3"
+    build-version: "v1.0.4"
+    owner: "mahesh@company.com"
+
+2. Used by Controllers & Tools
+
+Controllers, operators, and 3rd-party tools use annotations to store configs.
+
+Example: Ingress NGINX uses annotations for rules:
+
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+
+Example: Cert-Manager uses annotations to trigger TLS certificate generation.
+
+3. Debugging / Auditing
+
+You can add annotations to record who created/modified a resource, or track deployment history.
+
+metadata:
+  annotations:
+    deployed-by: "mahesh"
+    jira-ticket: "PROJ-123"
+
+4. Custom Information for Automation
+
+CI/CD pipelines or GitOps tools often add annotations to track versions, rollouts, or approvals.
+
+Example: ArgoCD/Flux adds annotations for sync status.
+
+5. Pod Scheduling & Behavior
+
+Some features require annotations instead of labels.
+
+Example: Taints, tolerations, or certain admission controllers check annotations.
+
+Example (downward API storing info in Pod):
+
+metadata:
+  annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+
+
+(used to tell autoscaler not to evict a pod)

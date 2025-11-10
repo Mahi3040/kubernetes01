@@ -1,0 +1,19 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: dynamic-disk-pod
+spec:
+  containers:
+  - name: dynamiccontainer
+    image: nginx
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - mountPath: /prod/test 
+        name: dynamic-disk-vol
+  volumes: 
+  - name: dynamic-disk-vol
+    persistentVolumeClaim:
+      claimName: dynamic-disk-pvc
+      
+      

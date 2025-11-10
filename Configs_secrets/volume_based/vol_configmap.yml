@@ -1,0 +1,8 @@
+apiVersion: v1 
+kind: ConfigMap
+metadata:
+  name: vol-configmap
+data:
+  person_name: Mahesh 
+  person_age: "28"
+

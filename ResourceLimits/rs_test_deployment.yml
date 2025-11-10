@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: rs-nginx
+  namespace: dev-team
+  labels:
+      app: shopping
+      env: dev 
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: shopping
+  template:
+    metadata:
+      labels:
+        app: shopping
+    spec:
+      containers:
+      - name: shoppingapp
+        image: nginx 
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits: 
+            cpu: 400m
+            memory: 400Mi
+
+
+
+
+

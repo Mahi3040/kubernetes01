@@ -1,0 +1,29 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: manual-disk-deploy 
+  labels:
+    name: manual-disk-app
+spec: 
+  replicas: 10
+  selector: 
+    matchLabels:
+      name: manual-disk-app
+  template:
+    metadata:
+      labels:
+        name: manual-disk-app
+    spec:
+      containers:
+      - name: manual-disk-container
+        image: nginx
+        ports: 
+        - containerPort: 80 
+        volumeMounts: 
+        - name: manual-disk-vol
+          mountPath: /manualdisk/mahi
+      volumes:
+      - name: manual-disk-vol
+        persistentVolumeClaim: 
+          claimName: manual-disk-pvc
+          

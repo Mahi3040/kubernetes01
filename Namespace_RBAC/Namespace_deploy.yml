@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: namespace-deployment
+  namespace: dev-team
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: namespceapp
+  template: 
+    metadata:
+      labels:
+        app: namespceapp
+    spec:
+      containers:
+        - name: namespace-container
+          image: nginx
+          ports:
+            - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Namespace 
+metadata:
+  name: dev-team

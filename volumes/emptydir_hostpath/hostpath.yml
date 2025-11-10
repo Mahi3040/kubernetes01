@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: hostpath-pod
+spec:
+  containers:
+  - name: host-path-container
+    image: nginx
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - name: hostpath-vol 
+        mountPath: /dev/qa
+
+  volumes: 
+    - name: hostpath-vol
+      hostPath:
+        path: /dev/team/qa
+        type: DirectoryOrCreate 
+        

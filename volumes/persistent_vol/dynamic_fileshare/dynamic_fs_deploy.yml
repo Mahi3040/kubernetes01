@@ -1,0 +1,29 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: dynamic-fs-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      name: dynafs 
+  template: 
+    metadata:
+      labels: 
+        name: dynafs 
+    spec:
+      containers:
+      - name: dynacontainers
+        image: nginx 
+        ports:
+        - containerPort: 80 
+        volumeMounts:
+        - name: dynavol
+          mountPath: /prod/test
+        
+      volumes:
+      - name: dynavol 
+        persistentVolumeClaim: 
+          claimName: dynamic-fs-pvc
+      
+        

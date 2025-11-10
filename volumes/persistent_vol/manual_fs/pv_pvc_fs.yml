@@ -1,0 +1,29 @@
+apiVersion: v1 
+kind: PersistentVolume 
+metadata: 
+  name: manual-fs-pv 
+spec: 
+  capacity: 
+    storage: 5Ti
+  accessModes:
+    - ReadWriteMany 
+  storageClassName: azurefile
+  persistentVolumeReclaimPolicy: Retain 
+  azureFile:
+    secretName: azure-secret
+    shareName: manual-fs01
+    readOnly: false
+  
+
+---
+apiVersion: v1 
+kind: PersistentVolumeClaim
+metadata:
+  name: manual-fs-pvc
+spec:
+  resources:
+    requests:
+      storage: 5Ti
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany

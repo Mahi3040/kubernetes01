@@ -1,0 +1,42 @@
+1️⃣ What is a Namespace?
+
+A namespace is a logical partition inside a Kubernetes cluster.
+
+Think of it like a folder or project inside a cluster where you can organize resources (Pods, Deployments, Services, etc.).
+
+Each namespace is isolated from others in terms of resource management and name collisions.
+
+2️⃣ Why we use Namespaces
+Organize resources
+
+Example:
+
+dev-team namespace → for development resources
+
+prod-team namespace → for production resources
+
+You can have the same Deployment name in different namespaces:
+
+dev-team/namespace_deployment
+prod-team/namespace_deployment
+
+
+They won’t conflict.
+
+Access control
+
+You can apply Role-Based Access Control (RBAC) per namespace.
+
+Example: Devs can only manage resources in dev-team namespace, not in prod-team.
+
+Resource quotas
+
+You can limit CPU, memory, or number of Pods per namespace using ResourceQuota.
+
+Prevents one team from consuming all cluster resources.
+
+Isolation
+
+Network policies and service discovery can be scoped per namespace.
+
+Helps avoid accidental interference between teams/environments.

@@ -1,0 +1,12 @@
+A NetworkPolicy in Kubernetes is a resource that controls network traffic between:
+
+Pods → Pods
+Pods → External endpoints
+External endpoints → Pods
+
+By default:
+
+🔹 All pods in a cluster can talk to each other (no restrictions).
+🔹 Once a NetworkPolicy is applied to a pod, all traffic is denied by default unless explicitly allowed.
+
+So, NetworkPolicies define “who can talk to whom” and “on what ports/protocols.”

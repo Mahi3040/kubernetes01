@@ -1,0 +1,9 @@
+APi Vaersion
+===========
+Purpose	Description	Example
+1️⃣ Tell Kubernetes which version of a resource you are using.Each resource (Pod, Deployment, etc.) has a version. apiVersion tells the API server how to handle it.	apiVersion: apps/v1 for Deployment
+2️⃣ Controls validation rules	Different versions support different fields/features. Using the right version ensures your YAML is valid.	apps/v1 requires selector in Deployment
+3️⃣ Ensures compatibility with cluster version	Some apiVersions are deprecated or removed in new Kubernetes versions.	extensions/v1beta1 is no longer valid
+4️⃣ Determines which controller handles the resource	The version helps Kubernetes route the resource to the correct internal controller.	Deployments go to the Deployment Controller
+5️⃣ Used internally by Kubernetes API server	The server uses it to decode the YAML into correct Go structs.	e.g., core/v1.Pod, apps/v1.Deployment structs
+6️⃣ Needed for CRDs (Custom Resource Definitions)	When creating your own resources, you define custom apiVersions like mygroup.example.com/v1	Custom APIs for operators, tools, etc.

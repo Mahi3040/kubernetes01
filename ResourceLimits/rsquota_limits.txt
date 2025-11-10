@@ -1,0 +1,7 @@
+CPU & Memory Units
+Resource	Unit	Meaning	Conversion	Example
+CPU	          1	    1 full CPU core	    1 core = 1000m	1 pod with requests.cpu: 500m uses 0.5 core
+CPU	          m	milliCPU (1/1000 of a core)	1000m = 1 core	200m = 0.2 CPU
+Memory	     Ki	Kibibyte	1024 bytes	1024 Ki = 1 Mi
+Memory	     Mi	Mebibyte	1024 Ki = 1,048,576 bytes	200Mi = 200 × 1024 Ki = 204,800 Ki
+Memory	    Gi	Gibibyte	1024 Mi = 1,073,741,824 bytes	2Gi = 2048 Mi

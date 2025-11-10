@@ -1,0 +1,16 @@
+
+
+
+
+
+
+ExternalIP:ServicePort (LB)
+        │
+        ▼
+NodeIP:NodePort (internal)
+        │
+        ▼
+ClusterIP:ServicePort
+        │
+        ▼
+Pod:targetPort
