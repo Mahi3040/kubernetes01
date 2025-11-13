@@ -1,0 +1,36 @@
+apiVersion: apps/v1 
+kind: StatefulSet
+metadata: 
+  name: statefulset-deploy
+  labels: 
+    app: mysql
+spec:
+  serviceName: state-service
+  replicas: 10
+  selector:
+    matchLabels:
+      app: mysql 
+  template: 
+    metadata:
+      labels:
+        app: mysql
+    spec: 
+      containers:
+      - name: mysql 
+        image: mysql
+        ports:
+        - containerPort: 3306 
+
+---
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: state-service 
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+  ports: 
+    - port: 3306
+      targetPort: 3306
+      name: mysql 
